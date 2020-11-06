@@ -39,7 +39,21 @@ BEGIN_ROCPRIM_NAMESPACE
 ROCPRIM_HOST_DEVICE inline
 constexpr unsigned int warp_size()
 {
+#if ( defined(__gfx801__) || \
+      defined(__gfx802__) || \
+      defined(__gfx803__) || \
+      defined(__gfx810__) || \
+      defined(__gfx900__) || \
+      defined(__gfx902__) || \
+      defined(__gfx904__) || \
+      defined(__gfx906__) || \
+      defined(__gfx908__) || \
+      defined(__gfx909__) )
     return warpSize;
+#else
+   // Temporary workaround for gfx1030
+    return 32;
+#endif
 }
 
 /// \brief Returns flat size of a multidimensional block (tile).

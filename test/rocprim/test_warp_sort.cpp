@@ -34,21 +34,30 @@ public:
     using params = Params;
 };
 
-#if (defined(__gfx1030__))
+#if ( defined(__HIP_ARCH_GFX801__) || \
+      defined(__HIP_ARCH_GFX802__) || \
+      defined(__HIP_ARCH_GFX803__) || \
+      defined(__HIP_ARCH_GFX810__) || \
+      defined(__HIP_ARCH_GFX900__) || \
+      defined(__HIP_ARCH_GFX902__) || \
+      defined(__HIP_ARCH_GFX904__) || \
+      defined(__HIP_ARCH_GFX906__) || \
+      defined(__HIP_ARCH_GFX908__) || \
+      defined(__HIP_ARCH_GFX909__))
     #define warp_sort_param_type(type) \
         warp_params<type, 2U>, \
         warp_params<type, 4U>, \
         warp_params<type, 8U>, \
         warp_params<type, 16U>, \
-        warp_params<type, 32U>
+        warp_params<type, 32U>, \
+       warp_params<type, 64U>
 #else
     #define warp_sort_param_type(type) \
        warp_params<type, 2U>, \
        warp_params<type, 4U>, \
        warp_params<type, 8U>, \
        warp_params<type, 16U>, \
-       warp_params<type, 32U>, \
-       warp_params<type, 64U>
+       warp_params<type, 32U>
 #endif
 typedef ::testing::Types<
     warp_sort_param_type(int),

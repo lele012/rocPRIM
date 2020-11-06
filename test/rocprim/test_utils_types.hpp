@@ -48,27 +48,36 @@ struct block_params
     static constexpr unsigned int block_size = BlockSize;
 };
 
-#if (defined(__gfx1030__))
+#if ( defined(__HIP_ARCH_GFX801__) || \
+      defined(__HIP_ARCH_GFX802__) || \
+      defined(__HIP_ARCH_GFX803__) || \
+      defined(__HIP_ARCH_GFX810__) || \
+      defined(__HIP_ARCH_GFX900__) || \
+      defined(__HIP_ARCH_GFX902__) || \
+      defined(__HIP_ARCH_GFX904__) || \
+      defined(__HIP_ARCH_GFX906__) || \
+      defined(__HIP_ARCH_GFX908__) || \
+      defined(__HIP_ARCH_GFX909__))
     #define warp_param_type(type) \
         warp_params<type, 4U>, \
         warp_params<type, 8U>, \
         warp_params<type, 16U>, \
         warp_params<type, 32U>, \
+       warp_params<type, 64U>, \
         warp_params<type, 3U>, \
         warp_params<type, 7U>, \
-        warp_params<type, 15U>
+        warp_params<type, 15U>, \
+       warp_params<type, 37U>, \
+       warp_params<type, 61U>
 #else
     #define warp_param_type(type) \
        warp_params<type, 4U>, \
        warp_params<type, 8U>, \
        warp_params<type, 16U>, \
        warp_params<type, 32U>, \
-       warp_params<type, 64U>, \
        warp_params<type, 3U>, \
        warp_params<type, 7U>, \
-       warp_params<type, 15U>, \
-       warp_params<type, 37U>, \
-       warp_params<type, 61U>
+       warp_params<type, 15U>
 #endif
 #define block_param_type(input_type, output_type) \
     block_params<input_type, output_type, 64U>, \
