@@ -50,8 +50,9 @@ constexpr unsigned int warp_size()
       defined(__gfx908__) || \
       defined(__gfx909__) )
     return warpSize;
+#elif defined(__gfx1030__)
+    return 32;
 #else
-   // Temporary workaround for gfx1030
     return 32;
 #endif
 }
