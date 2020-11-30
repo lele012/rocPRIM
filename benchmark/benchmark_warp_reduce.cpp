@@ -215,10 +215,7 @@ benchmark::RegisterBenchmark( \
 )
 
 #define BENCHMARK_TYPE(type) \
-    CREATE_BENCHMARK(type, 32, 64), \
-    CREATE_BENCHMARK(type, 37, 64), \
-    CREATE_BENCHMARK(type, 61, 64), \
-    CREATE_BENCHMARK(type, 64, 64)
+    CREATE_BENCHMARK(type, 32, 64)
 
 template<bool AllReduce, bool Segmented>
 void add_benchmarks(const std::string& name,

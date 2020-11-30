@@ -178,15 +178,15 @@ void run_benchmark(benchmark::State& state, hipStream_t stream, size_t size)
     )
 
 #define BENCHMARK_TYPE(type) \
-    CREATE_SORT_BENCHMARK(type, 64, 64), \
-    CREATE_SORT_BENCHMARK(type, 128, 64), \
-    CREATE_SORT_BENCHMARK(type, 256, 64), \
+    CREATE_SORT_BENCHMARK(type, 64, 32), \
+    CREATE_SORT_BENCHMARK(type, 128, 32), \
+    CREATE_SORT_BENCHMARK(type, 256, 32), \
     CREATE_SORT_BENCHMARK(type, 64, 32), \
     CREATE_SORT_BENCHMARK(type, 64, 16)
 
 #define BENCHMARK_KEY_TYPE(type, value) \
-    CREATE_SORTBYKEY_BENCHMARK(type, value, 64, 64), \
-    CREATE_SORTBYKEY_BENCHMARK(type, value, 256, 64)
+    CREATE_SORTBYKEY_BENCHMARK(type, value, 64, 32), \
+    CREATE_SORTBYKEY_BENCHMARK(type, value, 256, 32)
 
 int main(int argc, char *argv[])
 {

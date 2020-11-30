@@ -160,13 +160,12 @@ void run_benchmark(benchmark::State& state, hipStream_t stream, size_t size)
         stream, size \
     )
 
+// gfx1030 workaround: disable warpSize > 32 benchmark types
 #define BENCHMARK_TYPE(type) \
-    CREATE_BENCHMARK(type, 64, 64, Inclusive), \
-    CREATE_BENCHMARK(type, 128, 64, Inclusive), \
-    CREATE_BENCHMARK(type, 256, 64, Inclusive), \
+    CREATE_BENCHMARK(type, 64, 32, Inclusive), \
+    CREATE_BENCHMARK(type, 128, 32, Inclusive), \
     CREATE_BENCHMARK(type, 256, 32, Inclusive), \
     CREATE_BENCHMARK(type, 256, 16, Inclusive), \
-    CREATE_BENCHMARK(type, 63, 63, Inclusive), \
     CREATE_BENCHMARK(type, 62, 31, Inclusive), \
     CREATE_BENCHMARK(type, 60, 15, Inclusive)
 
